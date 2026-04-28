@@ -6,7 +6,7 @@ The system was intended to be used by a non-authenticated user to add categories
 
 If a category is deleted then all items will be cascadingly deleted as well.
 
-The pattern for this system is MVC
+The pattern for this system is MVC and we're hosting our application and database on Google Cloud Platform. The server is sitting on a container in Cloud Run and the database on Cloud SQL.
 
 ### System Design
 
@@ -24,7 +24,7 @@ flowchart LR
     end
   end
 
-  client -->|HTTPS| express
+  client <-->|HTTPS| express
   express <-->|Google Private Network| db
 
 
@@ -42,11 +42,15 @@ erDiagram
   CATEGORIES {
       int id PK
       varchar name
+      imageUrl text
   }
 
   ITEMS {
      int id PK
      varchar name
+     quantity int
+     price float
+     imageUrl text
      int category_id FK
   }
 ```
