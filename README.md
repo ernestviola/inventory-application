@@ -40,18 +40,18 @@ erDiagram
   CATEGORIES ||--o{ITEMS : ""
 
   CATEGORIES {
-      int id PK
-      varchar name
-      imageUrl text
+    int id PK
+    varchar name
+    text imageUrl
   }
 
   ITEMS {
-     int id PK
-     varchar name
-     quantity int
-     price float
-     imageUrl text
-     int category_id FK
+    int id PK
+    varchar name
+    int quantity
+    float price
+    text imageUrl
+    int category_id FK
   }
 ```
 
