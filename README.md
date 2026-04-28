@@ -37,15 +37,16 @@ flowchart LR
 
 ```mermaid
 erDiagram
-  CATEGORIES ||--o{ITEMS : ""
+  direction LR
+  CATEGORY ||--o{ITEM : ""
 
-  CATEGORIES {
+  CATEGORY {
     int id PK
     varchar name
     text imageUrl
   }
 
-  ITEMS {
+  ITEM {
     int id PK
     varchar name
     int quantity
