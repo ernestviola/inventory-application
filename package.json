@@ -1,0 +1,26 @@
+{
+  "name": "inventory-application",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/ernestviola/inventory-application#readme",
+  "bugs": {
+    "url": "https://github.com/ernestviola/inventory-application/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ernestviola/inventory-application.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "ejs": "^5.0.2",
+    "express": "^5.2.1",
+    "express-validator": "^7.3.2",
+    "pg": "^8.20.0"
+  }
+}
