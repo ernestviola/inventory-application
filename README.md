@@ -2,7 +2,7 @@
 
 ## Architecture
 
-The system was intended to be used by a non-authenticated user to add categories and items to that category.
+The system was intended to be used by a non-authenticated user to add categories, and to add items to that category.
 
 If a category is deleted then all items will be cascadingly deleted as well.
 

@@ -7,12 +7,13 @@ const category = {};
  * @returns {database object}
  */
 category.all = async (order = undefined) => {
-  if (!['asc', 'desc'].includes(order))
-    throw new Error('Only accept asc and desc. Got: ', order);
+  if (order && !['asc', 'desc'].includes(order))
+    throw new Error(`Only accept asc and desc. Got: ${order}`);
   try {
+    const orderClause = order ? `order by name ${order.toLowerCase()}` : '';
     const result = await pool.query(
       `
-        select * from category ${!order ? '' : order.toLowerCase() === 'asc' ? 'order by asc' : 'order by desc'}
+        select * from category ${orderClause}
         `,
     );
     return result;
@@ -45,7 +46,8 @@ category.find = async (id) => {
  * @param {string} name name of the category
  * @param {string} imageUrl URL containing the image
  */
-category.create = async (name, imageUrl = undefined) => {
+category.create = async (name, imageUrl = null) => {
+  if (!name || !name.trim()) throw new Error('Category name is required');
   try {
     const result = await pool.query(
       `
