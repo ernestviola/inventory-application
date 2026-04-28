@@ -11,13 +11,12 @@ The pattern for this system is MVC
 ### System Design
 
 ```mermaid
-flowchart TD
+flowchart LR
   client[Client Browser]
 
 
   subgraph gcp[☁️ Google Cloud Platform]
-    direction LR
-    subgraph gcr[🐳 Google Cloud Run]
+    subgraph gcr[Google Cloud Run]
       express[Express Server]
     end
     subgraph gsql[Google SQL]
