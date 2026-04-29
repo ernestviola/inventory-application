@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 
 import categoryRouter from './routes/categoryRouter.js';
 import indexRouter from './routes/indexRouter.js';
+import itemRouter from './routes/itemRouter.js';
 
 // Environment variables
 const PORT = process.env.PORT || 3000;
@@ -25,6 +26,7 @@ app.set('view engine', 'ejs');
 
 app.use(express.static(publicPath));
 app.use(express.urlencoded({ extended: true }));
+app.use('/item', itemRouter);
 app.use('/category', categoryRouter);
 app.use('/', indexRouter);
 app.all('/*splat', (req, res) => res.send('404 - Not Found'));

@@ -1,4 +1,3 @@
-import { Router } from 'express';
 import { body, validationResult, matchedData } from 'express-validator';
 import category from '../db/queries/category.js';
 
@@ -12,14 +11,11 @@ const categoryController = {};
 
 categoryController.index = async (req, res) => {
   const { rows } = await category.all();
-  res.json(rows);
+  console.log(rows[0]);
+  res.render('category/categories', { categories: rows });
 };
 
-categoryController.renderNewForm = (req, res) => {
-  res.render('category/new');
-};
-
-categoryController.createNew = [
+categoryController.create = [
   validateCategory,
   async (req, res) => {
     const errors = validationResult(req);
@@ -35,9 +31,11 @@ categoryController.createNew = [
   },
 ];
 
-categoryController.create = () => {};
-
-categoryController.getOne = () => {};
+categoryController.getOne = async (req, res) => {
+  const { id } = req.params;
+  const { rows } = await category.find(id);
+  res.render('category/category', { category: rows[0] });
+};
 
 categoryController.getAll = () => {};
 
