@@ -11,4 +11,8 @@ categoryRouter.post('/new', categoryController.create);
 
 categoryRouter.get('/:id/edit', categoryController.edit);
 
+categoryRouter.post('/:id/update', categoryController.update);
+
+categoryRouter.post('/:id/delete', categoryController.delete);
+
 export default categoryRouter;

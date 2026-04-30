@@ -8,14 +8,15 @@
       value="<%= category.name %>"
     />
   </label>
-  <label for="imageUrl">
+  <label for="imageurl">
     URL:
     <input
       type="text"
-      name="imageUrl"
+      name="imageurl"
       placeholder="url"
-      value="<%= category.imageUrl %>"
+      value="<%= category.imageurl %>"
     />
   </label>
+  <input type="text" name="id" value="<%= category.id %>" hidden />
   <button type="submit">Submit</button>
 </form>

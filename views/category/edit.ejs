@@ -7,6 +7,6 @@
   </head>
   <body>
     <h1><%= category.name %></h1>
-    <%- include('../components/categoryForm',{url: '/category/update', category: category}) %>
+    <%- include('../components/categoryForm',{url: `/category/${category.id}/update`, category: category}) %>
   </body>
 </html>

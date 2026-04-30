@@ -25,6 +25,7 @@
             <li><%= category.name %> <img src='<%= category.imageUrl %>' alt=''></li>
           </a>
           <a href='/category/<%= category.id %>/edit'>Edit</a>
+          <form action='/category/<%= category.id %>/delete' method='post'><button type='submit'>Delete</button></form>
         <% }) %>
       </ul>
     <% } %>
