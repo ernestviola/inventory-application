@@ -12,7 +12,7 @@ item.all = async (order = undefined) => {
   try {
     const orderClause = order ? `order by name ${order.toLowerCase()}` : '';
     const result = await pool.query(` select * from item ${orderClause}`);
-    return result;
+    return result.rows;
   } catch (error) {
     console.error(error);
   }
@@ -26,7 +26,19 @@ item.all = async (order = undefined) => {
 item.find = async (id) => {
   try {
     const result = await pool.query(`select * from item where id = $1`, [id]);
-    return result;
+    return result.rows;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+item.findByCategory = async (category_id) => {
+  try {
+    const result = await pool.query(
+      `select * from item where category_id = $1`,
+      [category_id],
+    );
+    return result.rows;
   } catch (error) {
     console.error(error);
   }
@@ -59,7 +71,7 @@ item.create = async (
       `,
       [name, quantity, price, imageUrl, category_id],
     );
-    return result;
+    return result.rows;
   } catch (error) {
     console.error(error);
   }
@@ -87,7 +99,7 @@ item.update = async (id, updates) => {
       `,
       values,
     );
-    return result;
+    return result.rows;
   } catch (error) {
     console.error(error);
   }
@@ -105,7 +117,7 @@ item.delete = async (id) => {
       delete from item where id = $1`,
       [id],
     );
-    return result;
+    return result.rows;
   } catch (error) {
     console.error(error);
   }

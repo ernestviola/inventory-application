@@ -1,5 +1,6 @@
 import { body, validationResult, matchedData } from 'express-validator';
 import category from '../db/queries/category.js';
+import item from '../db/queries/item.js';
 
 const validateCategory = [
   body('id').isInt(),
@@ -10,8 +11,7 @@ const validateCategory = [
 const categoryController = {};
 
 categoryController.index = async (req, res) => {
-  const { rows } = await category.all();
-  console.log(rows[0]);
+  const rows = await category.all();
   res.render('category/categories', { categories: rows });
 };
 
@@ -33,8 +33,14 @@ categoryController.create = [
 
 categoryController.getOne = async (req, res) => {
   const { id } = req.params;
-  const { rows } = await category.find(id);
-  res.render('category/category', { category: rows[0] });
+  const categoryResult = await category.find(id);
+  const itemsResult = await item.findByCategory(id);
+
+  console.log(categoryResult, itemsResult);
+  res.render('category/category', {
+    category: categoryResult[0],
+    items: itemsResult,
+  });
 };
 
 categoryController.getAll = () => {};

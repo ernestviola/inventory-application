@@ -16,7 +16,7 @@ category.all = async (order = undefined) => {
         select * from category ${orderClause}
         `,
     );
-    return result;
+    return result.rows;
   } catch (error) {
     console.error(error);
   }
@@ -35,7 +35,7 @@ category.find = async (id) => {
       `,
       [id],
     );
-    return result;
+    return result.rows;
   } catch (error) {
     console.error(error);
   }
@@ -56,7 +56,7 @@ category.create = async (name, imageUrl = null) => {
       `,
       [name, imageUrl],
     );
-    return result;
+    return result.rows;
   } catch (error) {
     console.error(error);
   }
@@ -83,7 +83,7 @@ category.update = async (id, updates) => {
       `,
       values,
     );
-    return result;
+    return result.rows;
   } catch (error) {
     console.error(error);
   }
@@ -101,7 +101,7 @@ category.delete = async (id) => {
       delete from category where id = $1`,
       [id],
     );
-    return result;
+    return result.rows;
   } catch (error) {
     console.error(error);
   }

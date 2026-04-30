@@ -7,14 +7,20 @@
   </head>
   <body>
     <h1><%= category.name %></h1>
+    <h2>Items</h2>
     New Item
-    <form action="/item/new" method="post">
-      <label for=""> Name: <input type="text" name="name" /> </label>
-      <label for=""> Quantity: <input type="text" name="quantity" /> </label>
-      <label for=""> Price: <input type="text" name="price" /> </label>
-      <label for=""> imageUrl: <input type="text" name="imageUrl" /> </label>
-      <input type="text" name="category_id" value="<%= category.id %>" hidden />
-      <button type="submit">Submit</button>
-    </form>
+    <%- include('../components/itemForm',{url: '/item/new'}) %>
+
+    <% if (items) { %>
+      <ul>
+      <% items.forEach( item => { %>
+        <li>
+          <span><%= item.name %></span>
+          <form action='/item/edit' method='get'><button type='submit'>Edit</button></form>
+          <form action='/item/delete' method='post'><button type='submit'>Delete</button></form>
+        </li>
+      <% }) %>
+      </ul>
+    <% } %>
   </body>
 </html>
