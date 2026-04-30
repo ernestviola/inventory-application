@@ -1,5 +1,24 @@
 # An inventory application
 
+Current State: Project Dropped.
+
+I really didn't enjoy this project and I think it has to do with EJS. May revisit.
+Last left off on working on the category CRUD actions specifically /category/:id/update
+
+WIP
+Category CRUD
+Item CRUD
+
+/category/edit
+/category/update
+/category/delete
+
+/item/edit
+/item/update
+/item/delete
+
+/
+
 ## Architecture
 
 The system was intended to be used by a non-authenticated user to add categories, and to add items to that category.

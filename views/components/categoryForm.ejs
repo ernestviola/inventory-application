@@ -1,0 +1,21 @@
+<form action="<%= url %>" method="post">
+  <label for="name">
+    Name:
+    <input
+      type="text"
+      name="name"
+      placeholder="name..."
+      value="<%= category.name %>"
+    />
+  </label>
+  <label for="imageUrl">
+    URL:
+    <input
+      type="text"
+      name="imageUrl"
+      placeholder="url"
+      value="<%= category.imageUrl %>"
+    />
+  </label>
+  <button type="submit">Submit</button>
+</form>

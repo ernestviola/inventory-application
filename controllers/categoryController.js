@@ -36,14 +36,18 @@ categoryController.getOne = async (req, res) => {
   const categoryResult = await category.find(id);
   const itemsResult = await item.findByCategory(id);
 
-  console.log(categoryResult, itemsResult);
   res.render('category/category', {
     category: categoryResult[0],
     items: itemsResult,
   });
 };
 
-categoryController.getAll = () => {};
+categoryController.edit = async (req, res) => {
+  const { id } = req.params;
+  const categoryResult = await category.find(id);
+  console.log(categoryResult);
+  res.render('category/edit', { category: categoryResult[0] });
+};
 
 categoryController.update = () => {};
 

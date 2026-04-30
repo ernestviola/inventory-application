@@ -9,4 +9,6 @@ categoryRouter.get('/:id', categoryController.getOne);
 
 categoryRouter.post('/new', categoryController.create);
 
+categoryRouter.get('/:id/edit', categoryController.edit);
+
 export default categoryRouter;
