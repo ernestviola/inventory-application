@@ -3,10 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Shop</title>
   </head>
   <body>
     <%- include('components/navbar') %>
-    <h1>The silly shop - Add your own items and buy them!</h1>
+    <h1>Shop</h1>
+    <% if (rows) { %>
+      <% rows.forEach(rows => { %>
+        <h2><%= rows.category_name %></h2>
+        <% if (rows.items) { %>
+          <% rows.items.forEach(item => { %>
+            <%- include('components/itemCard',{item: item}) %>
+          <% }) %>
+        <% } %>
+
+      <% }); %>
+    <% } %>
   </body>
 </html>

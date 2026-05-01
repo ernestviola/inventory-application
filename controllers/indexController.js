@@ -40,6 +40,13 @@ indexController.get = async (req, res) => {
     if (a.category_name < b.category_name) return -1;
     else return 1;
   });
+
+  categoryArray.forEach((category) => {
+    category.items.sort((a, b) => {
+      if (a.category_name < b.category_name) return -1;
+      else return 1;
+    });
+  });
   console.log(categoryArray);
   res.render('index', { rows: categoryArray });
 };
