@@ -3,9 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= category.name %></title>
+    <link rel='stylesheet' href='styles.css'>
+    <title>View <%= category.name %></title>
   </head>
   <body>
+    <%- include('../components/navbar') %>
     <h1><%= category.name %></h1>
     <h2>Items</h2>
     New Item
@@ -18,7 +20,8 @@
           <span><%= item.name %></span>
           <span><%= item.quantity %></span>
           <span><%= item.price %></span>
-          <span><%= item.imageurl %></span>
+          <img src='<%= item.imageurl %>' alt='Picture of <%= item.name %>'>
+          <img><%= item.imageurl %></img>
           <a href='/item/<%= item.id %>/edit'>Edit</a>
           <form action='/item/<%= item.id %>/delete' method='post'>
             <input type='text' name='category_id' value='<%= category.id %>' hidden>

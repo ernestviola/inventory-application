@@ -73,3 +73,7 @@ erDiagram
 
 After setting the .env variables the project can be ran with
 `npm install` then `npm run dev`
+
+## Attributions
+
+CSS reset from [Josh Comeau](https://www.joshwcomeau.com/css/custom-css-reset/)
