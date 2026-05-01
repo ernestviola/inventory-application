@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Edit item</h1>
+    <form action="/item/<%= item.id %>/update" method="post">
+      <label for=""> Name: <input type="text" name="name" value="<%= item.name %>" /> </label>
+      <label for=""> Quantity: <input type="text" name="quantity" value='<%= item.quantity %>' /> </label>
+      <label for=""> Price: <input type="text" name="price" value='<%= item.price %>'' /> </label>
+      <label for=""> imageurl: <input type="text" name="imageurl" value='<%= item.imageurl %>' /> </label>
+      <input type="text" name="category_id" value="<%= item.category_id %>" hidden />
+      <button type="submit">Submit</button>
+    </form>
+  </body>
+</html>

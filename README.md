@@ -3,7 +3,7 @@
 Current State: Project Dropped.
 
 I really didn't enjoy this project and I think it has to do with EJS. May revisit.
-Last left off on working on the category CRUD actions for items.
+Last left off on working on the category CRUD actions for items delete.
 
 WIP
 Category CRUD

@@ -16,7 +16,10 @@
       <% items.forEach( item => { %>
         <li>
           <span><%= item.name %></span>
-          <form action='/item/edit' method='get'><button type='submit'>Edit</button></form>
+          <span><%= item.quantity %></span>
+          <span><%= item.price %></span>
+          <span><%= item.imageurl %></span>
+          <a href='/item/<%= item.id %>/edit'>Edit</a>
           <form action='/item/delete' method='post'><button type='submit'>Delete</button></form>
         </li>
       <% }) %>
