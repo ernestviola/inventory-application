@@ -20,7 +20,10 @@
           <span><%= item.price %></span>
           <span><%= item.imageurl %></span>
           <a href='/item/<%= item.id %>/edit'>Edit</a>
-          <form action='/item/delete' method='post'><button type='submit'>Delete</button></form>
+          <form action='/item/<%= item.id %>/delete' method='post'>
+            <input type='text' name='category_id' value='<%= category.id %>' hidden>
+            <button type='submit'>Delete</button>
+          </form>
         </li>
       <% }) %>
       </ul>

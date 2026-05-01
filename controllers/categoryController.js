@@ -59,7 +59,6 @@ categoryController.getOne = async (req, res) => {
 categoryController.edit = async (req, res) => {
   const { id } = req.params;
   const categoryResult = await category.find(id);
-  console.log(categoryResult);
   res.render('category/edit', { category: categoryResult[0] });
 };
 
@@ -83,7 +82,6 @@ categoryController.update = [
 ];
 
 categoryController.delete = async (req, res) => {
-  console.log('huh');
   try {
     const { id } = req.params;
 

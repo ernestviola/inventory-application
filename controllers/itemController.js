@@ -15,7 +15,6 @@ itemController.create = [
   validateItem,
   async (req, res) => {
     const { name, quantity, price, imageurl, category_id } = matchedData(req);
-    console.log(name, quantity, price, imageurl, category_id);
     const result = await item.create(
       name,
       quantity,
@@ -53,6 +52,16 @@ itemController.update = [
     }
   },
 ];
-itemController.delete = () => {};
+
+itemController.delete = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { category_id } = req.body;
+    const itemResult = await item.delete(id);
+    res.redirect(`/category/${category_id}`);
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 export default itemController;
