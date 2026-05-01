@@ -1,5 +1,5 @@
 import { body, validationResult, matchedData } from 'express-validator';
-import item from '../db/queries/item.js';
+import item from '../db/models/item.js';
 
 const validateItem = [
   body('name').trim().isAlphanumeric(),

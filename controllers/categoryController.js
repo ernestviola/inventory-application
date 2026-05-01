@@ -1,6 +1,6 @@
 import { body, validationResult, matchedData } from 'express-validator';
-import category from '../db/queries/category.js';
-import item from '../db/queries/item.js';
+import category from '../db/models/category.js';
+import item from '../db/models/item.js';
 
 const validateCategoryCreate = [
   body('name').trim().notEmpty().withMessage('Name is required'),
