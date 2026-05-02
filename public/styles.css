@@ -78,3 +78,38 @@ h6 {
 #__next {
   isolation: isolate;
 }
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo-primary {
+  font-size: 32px;
+  font-weight: 600;
+}
+
+.logo-secondary {
+  font-style: italic;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 30px;
+}
+
+.navbar-links > li {
+  list-style: none;
+}
+
+.navbar-links > li > a {
+  text-decoration: none;
+  color: black;
+}
