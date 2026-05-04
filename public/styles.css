@@ -113,3 +113,28 @@ h6 {
   text-decoration: none;
   color: black;
 }
+
+.index-category {
+}
+
+.index-items {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-content: center;
+  align-content: center;
+}
+
+.categories {
+  display: flex;
+  flex-direction: column;
+}
+
+.categories > li {
+  list-style: none;
+  display: flex;
+}
+
+.categories > li > a {
+  color: black;
+  text-decoration: none;
+}

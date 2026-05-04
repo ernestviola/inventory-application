@@ -2,7 +2,7 @@ import { body, validationResult, matchedData } from 'express-validator';
 import item from '../db/models/item.js';
 
 const validateItem = [
-  body('name').trim().isAlphanumeric(),
+  body('name').trim(),
   body('quantity').trim().isNumeric().optional(),
   body('price').isNumeric(),
   body('imageurl').trim().isURL().optional(),
