@@ -141,6 +141,13 @@ dialog .form {
   margin-bottom: 20px;
 }
 
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
 .btn {
   padding: 8px 20px;
   border: none;

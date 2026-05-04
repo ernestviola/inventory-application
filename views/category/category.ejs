@@ -8,9 +8,10 @@
   </head>
   <body>
     <%- include('../components/navbar') %>
-    <h1><%= category.name %></h1>
-
-    <button class="btn btn-primary" onclick="document.getElementById('new-item-dialog').showModal()">+ New Item</button>
+    <div class="page-header">
+      <h1><%= category.name %></h1>
+      <button class="btn btn-primary" onclick="document.getElementById('new-item-dialog').showModal()">+ New Item</button>
+    </div>
 
     <dialog id="new-item-dialog" onclick="if(event.target===this)this.close()">
       <h2 class="dialog-title">New Item</h2>
