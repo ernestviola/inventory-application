@@ -119,9 +119,14 @@ h6 {
 
 .index-items {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 40px;
   justify-content: center;
   align-content: center;
+}
+
+.card {
+  border: 1px solid black;
 }
 
 .categories {
