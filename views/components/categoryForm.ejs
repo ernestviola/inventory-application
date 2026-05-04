@@ -1,22 +1,19 @@
-<form action="<%= url %>" method="post">
-  <label for="name">
-    Name:
-    <input
-      type="text"
-      name="name"
-      placeholder="name..."
-      value="<%= category.name %>"
-    />
-  </label>
-  <label for="imageurl">
-    URL:
-    <input
-      type="text"
-      name="imageurl"
-      placeholder="url"
-      value="<%= category.imageurl %>"
-    />
-  </label>
+<form action="<%= url %>" method="post" class="form">
+  <div class="form-group">
+    <label class="form-label" for="name">Name</label>
+    <input class="form-input" type="text" id="name" name="name" placeholder="Category name..." value="<%= category.name %>" />
+  </div>
+  <div class="form-group">
+    <label class="form-label" for="imageurl">Image URL</label>
+    <input class="form-input" type="text" id="imageurl" name="imageurl" placeholder="https://..." value="<%= category.imageurl %>" />
+  </div>
   <input type="text" name="id" value="<%= category.id %>" hidden />
-  <button type="submit">Submit</button>
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary">Save</button>
+    <% if (typeof cancelTarget !== 'undefined') { %>
+      <a href="<%= cancelTarget %>" class="btn btn-ghost">Cancel</a>
+    <% } else { %>
+      <button type="button" class="btn btn-ghost" onclick="this.closest('dialog').close()">Cancel</button>
+    <% } %>
+  </div>
 </form>

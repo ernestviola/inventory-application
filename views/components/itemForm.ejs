@@ -1,8 +1,27 @@
-<form action="<%= url %>" method="post">
-  <label for=""> Name: <input type="text" name="name" /> </label>
-  <label for=""> Quantity: <input type="text" name="quantity" /> </label>
-  <label for=""> Price: <input type="text" name="price" /> </label>
-  <label for=""> imageurl: <input type="text" name="imageurl" /> </label>
-  <input type="text" name="category_id" value="<%= category.id %>" hidden />
-  <button type="submit">Submit</button>
+<form action="<%= url %>" method="post" class="form">
+  <div class="form-group">
+    <label class="form-label" for="name">Name</label>
+    <input class="form-input" type="text" id="name" name="name" placeholder="Item name..." value="<%= typeof item !== 'undefined' ? item.name : '' %>" />
+  </div>
+  <div class="form-group">
+    <label class="form-label" for="quantity">Quantity</label>
+    <input class="form-input" type="number" id="quantity" name="quantity" placeholder="0" min="0" value="<%= typeof item !== 'undefined' ? item.quantity : '' %>" />
+  </div>
+  <div class="form-group">
+    <label class="form-label" for="price">Price</label>
+    <input class="form-input" type="number" id="price" name="price" placeholder="0.00" min="0" step="0.01" value="<%= typeof item !== 'undefined' ? item.price : '' %>" />
+  </div>
+  <div class="form-group">
+    <label class="form-label" for="imageurl">Image URL</label>
+    <input class="form-input" type="text" id="imageurl" name="imageurl" placeholder="https://..." value="<%= typeof item !== 'undefined' ? item.imageurl : '' %>" />
+  </div>
+  <input type="text" name="category_id" value="<%= typeof item !== 'undefined' ? item.category_id : category.id %>" hidden />
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary">Save</button>
+    <% if (typeof cancelTarget !== 'undefined') { %>
+      <a href="<%= cancelTarget %>" class="btn btn-ghost">Cancel</a>
+    <% } else { %>
+      <button type="button" class="btn btn-ghost" onclick="this.closest('dialog').close()">Cancel</button>
+    <% } %>
+  </div>
 </form>
