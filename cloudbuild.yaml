@@ -7,7 +7,19 @@ options:
   logging: CLOUD_LOGGING_ONLY
 
 steps:
-  # Build the Docker image
+  # Build artifact repo if doesn't exist
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    entrypoint: bash
+    args:
+      - -c
+      - |
+        gcloud artifacts repositories describe ${_AR_REPO} \
+          --location=${_REGION} || \
+        gcloud artifacts repositories create ${_AR_REPO} \
+          --repository-format=docker \
+          --location=${_REGION} \
+          --description="Docker repository for ${_SERVICE_NAME}"
+
   - name: gcr.io/cloud-builders/docker
     args:
       - build
