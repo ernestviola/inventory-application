@@ -1,18 +1,5 @@
 # An inventory application
 
-Current State: Project Dropped.
-
-I really didn't enjoy this project and I think it has to do with EJS. May revisit.
-Formatting the categoryItem query so that we can display it as Category (heading) > Item (cards)
-
-WIP
-Category Validation
-Item Validation
-Homepage
-Styles
-
-/
-
 ## Architecture
 
 The system was intended to be used by a non-authenticated user to add categories, and to add items to that category.
