@@ -1,15 +1,24 @@
+<%
+  const vals = typeof formData !== 'undefined' ? formData : category;
+  const fieldError = (field) => {
+    if (typeof errors === 'undefined') return null;
+    return errors.find(e => e.path === field) || null;
+  };
+%>
 <form action="<%= url %>" method="post" class="form">
   <div class="form-group">
     <label class="form-label" for="name">Name</label>
-    <input class="form-input" type="text" id="name" name="name" placeholder="Category name..." value="<%= category.name %>" />
+    <input class="form-input<%= fieldError('name') ? ' form-input--error' : '' %>" type="text" id="name" name="name" placeholder="Category name..." value="<%= vals.name || '' %>" />
+    <% if (fieldError('name')) { %><span class="form-error"><%= fieldError('name').msg %></span><% } %>
   </div>
   <div class="form-group">
     <label class="form-label" for="imageurl">Image URL</label>
-    <input class="form-input" type="text" id="imageurl" name="imageurl" placeholder="https://..." value="<%= category.imageurl %>" />
+    <input class="form-input<%= fieldError('imageurl') ? ' form-input--error' : '' %>" type="text" id="imageurl" name="imageurl" placeholder="https://..." value="<%= vals.imageurl || '' %>" />
+    <% if (fieldError('imageurl')) { %><span class="form-error"><%= fieldError('imageurl').msg %></span><% } %>
   </div>
   <input type="text" name="id" value="<%= category.id %>" hidden />
   <div class="form-actions">
     <button type="submit" class="btn btn-primary">Save</button>
-      <button type="button" class="btn btn-ghost" onclick="this.closest('dialog').close()">Cancel</button>
+    <button type="button" class="btn btn-ghost" onclick="this.closest('dialog').close()">Cancel</button>
   </div>
 </form>

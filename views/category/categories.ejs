@@ -13,16 +13,26 @@
       <button class="btn btn-primary" onclick="document.getElementById('new-category-dialog').showModal()">+ New Category</button>
     </div>
 
+    <%
+      const isCreateError = typeof openDialog !== 'undefined' && openDialog === 'new-category-dialog';
+      const createVals = isCreateError && typeof formData !== 'undefined' ? formData : {};
+      const createFieldError = (field) => {
+        if (!isCreateError || typeof errors === 'undefined') return null;
+        return errors.find(e => e.path === field) || null;
+      };
+    %>
     <dialog id="new-category-dialog" onclick="if(event.target===this)this.close()">
       <h2 class="dialog-title">New Category</h2>
       <form action="/category/new" method="post" class="form">
         <div class="form-group">
-          <label class="form-label" for="name">Name</label>
-          <input class="form-input" type="text" id="name" name="name" placeholder="Category name..." />
+          <label class="form-label" for="new-name">Name</label>
+          <input class="form-input<%= createFieldError('name') ? ' form-input--error' : '' %>" type="text" id="new-name" name="name" placeholder="Category name..." value="<%= createVals.name || '' %>" />
+          <% if (createFieldError('name')) { %><span class="form-error"><%= createFieldError('name').msg %></span><% } %>
         </div>
         <div class="form-group">
-          <label class="form-label" for="imageUrl">Image URL</label>
-          <input class="form-input" type="text" id="imageUrl" name="imageUrl" placeholder="https://..." />
+          <label class="form-label" for="new-imageurl">Image URL</label>
+          <input class="form-input<%= createFieldError('imageurl') ? ' form-input--error' : '' %>" type="text" id="new-imageurl" name="imageurl" placeholder="https://..." value="<%= createVals.imageurl || '' %>" />
+          <% if (createFieldError('imageurl')) { %><span class="form-error"><%= createFieldError('imageurl').msg %></span><% } %>
         </div>
         <div class="form-actions">
           <button type="submit" class="btn btn-primary">Add</button>
@@ -33,7 +43,11 @@
 
     <% if (categories) {%>
       <ul class='categories'>
-        <% categories.forEach( category => { %>
+        <% categories.forEach( category => {
+          const isEditError = typeof openDialog !== 'undefined' && openDialog === `edit-category-${category.id}`;
+          const editErrors = isEditError ? errors : undefined;
+          const editFormData = isEditError ? formData : undefined;
+        %>
           <li class='category-row'>
             <img src='<%= category.imageUrl %>' alt='<%= category.name %>' class='category-row-img'>
             <a href='/category/<%= category.id %>' class='category-row-name'><%= category.name %></a>
@@ -50,10 +64,14 @@
           </li>
           <dialog id="edit-category-<%= category.id %>" onclick="if(event.target===this)this.close()">
             <h2 class="dialog-title">Edit <%= category.name %></h2>
-            <%- include('../components/categoryForm', { url: `/category/${category.id}/update`, category: category }) %>
+            <%- include('../components/categoryForm', { url: `/category/${category.id}/update`, category: category, errors: editErrors, formData: editFormData }) %>
           </dialog>
         <% }) %>
       </ul>
+    <% } %>
+
+    <% if (typeof openDialog !== 'undefined') { %>
+      <script>document.getElementById('<%= openDialog %>').showModal();</script>
     <% } %>
   </body>
 </html>

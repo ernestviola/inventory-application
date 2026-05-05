@@ -186,6 +186,20 @@ dialog .form {
   align-items: center;
 }
 
+.form-error {
+  color: #c0392b;
+  font-size: 0.8rem;
+}
+
+.form-input--error {
+  border-color: #c0392b;
+}
+
+.form-input--error:focus {
+  border-color: #c0392b;
+  box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.15);
+}
+
 .logo {
   display: flex;
   flex-direction: column;

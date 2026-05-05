@@ -15,12 +15,18 @@
 
     <dialog id="new-item-dialog" onclick="if(event.target===this)this.close()">
       <h2 class="dialog-title">New Item</h2>
-      <%- include('../components/itemForm', { url: '/item/new' }) %>
+      <%- include('../components/itemForm', {
+        url: '/item/new',
+        errors: (typeof openDialog !== 'undefined' && openDialog === 'new-item-dialog') ? errors : undefined,
+        formData: (typeof openDialog !== 'undefined' && openDialog === 'new-item-dialog') ? formData : undefined
+      }) %>
     </dialog>
 
     <% if (items) { %>
       <ul class='item-list'>
-      <% items.forEach( item => { %>
+      <% items.forEach( item => {
+        const isEditError = typeof openDialog !== 'undefined' && openDialog === `edit-item-${item.id}`;
+      %>
         <li class='item-row'>
           <img src='<%= item.imageurl %>' alt='Picture of <%= item.name %>' class='item-row-img'>
           <span class='item-row-name'><%= item.name %></span>
@@ -40,10 +46,19 @@
         </li>
         <dialog id="edit-item-<%= item.id %>" onclick="if(event.target===this)this.close()">
           <h2 class="dialog-title">Edit <%= item.name %></h2>
-          <%- include('../components/itemForm', { url: `/item/${item.id}/update`, item: item }) %>
+          <%- include('../components/itemForm', {
+            url: `/item/${item.id}/update`,
+            item: item,
+            errors: isEditError ? errors : undefined,
+            formData: isEditError ? formData : undefined
+          }) %>
         </dialog>
       <% }) %>
       </ul>
+    <% } %>
+
+    <% if (typeof openDialog !== 'undefined') { %>
+      <script>document.getElementById('<%= openDialog %>').showModal();</script>
     <% } %>
   </body>
 </html>

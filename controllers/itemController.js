@@ -1,12 +1,13 @@
 import { body, validationResult, matchedData } from 'express-validator';
 import item from '../db/models/item.js';
+import category from '../db/models/category.js';
 
 const validateItem = [
-  body('name').trim(),
-  body('quantity').trim().isNumeric().optional(),
-  body('price').isNumeric(),
-  body('imageurl').trim().isURL().optional(),
-  body('category_id').isNumeric(),
+  body('name').trim().notEmpty().withMessage('Name is required'),
+  body('quantity').isInt({ min: 0 }).withMessage('Quantity must be a non-negative integer').optional({ values: 'falsy' }),
+  body('price').notEmpty().withMessage('Price is required').isFloat({ min: 0 }).withMessage('Price must be a positive number'),
+  body('imageurl').trim().isURL().optional({ values: 'falsy' }),
+  body('category_id').isInt(),
 ];
 
 const itemController = {};
@@ -15,19 +16,23 @@ itemController.create = [
   validateItem,
   async (req, res) => {
     const errors = validationResult(req);
-    if (errors) {
-      console.log('fail');
-      // WIP send errors back to category page with form still filled out but with errors
+    const { category_id } = req.body;
+    if (!errors.isEmpty()) {
+      const [categoryResult, itemsResult] = await Promise.all([
+        category.find(category_id),
+        item.findByCategory(category_id),
+      ]);
+      return res.render('category/category', {
+        category: categoryResult[0],
+        items: itemsResult,
+        errors: errors.array(),
+        formData: req.body,
+        openDialog: 'new-item-dialog',
+      });
     }
     try {
-      const { name, quantity, price, imageurl, category_id } = matchedData(req);
-      const result = await item.create(
-        name,
-        quantity,
-        price,
-        imageurl,
-        category_id,
-      );
+      const { name, quantity, price, imageurl } = matchedData(req);
+      await item.create(name, quantity, price, imageurl, category_id);
       res.redirect(`/category/${category_id}`);
     } catch (error) {
       console.log(error);
@@ -45,16 +50,25 @@ itemController.update = [
   validateItem,
   async (req, res) => {
     const errors = validationResult(req);
-
-    try {
-      const { id } = req.params;
-      const { name, quantity, price, imageurl, category_id } = matchedData(req);
-      const itemResult = await item.update(id, {
-        name,
-        quantity,
-        price,
-        imageurl,
+    const { id } = req.params;
+    const { category_id } = req.body;
+    if (!errors.isEmpty()) {
+      const [categoryResult, itemsResult] = await Promise.all([
+        category.find(category_id),
+        item.findByCategory(category_id),
+      ]);
+      return res.render('category/category', {
+        category: categoryResult[0],
+        items: itemsResult,
+        errors: errors.array(),
+        formData: req.body,
+        formItemId: id,
+        openDialog: `edit-item-${id}`,
       });
+    }
+    try {
+      const { name, quantity, price, imageurl } = matchedData(req);
+      await item.update(id, { name, quantity, price, imageurl });
       res.redirect(`/category/${category_id}`);
     } catch (error) {
       console.error(error);
@@ -66,7 +80,7 @@ itemController.delete = async (req, res) => {
   try {
     const { id } = req.params;
     const { category_id } = req.body;
-    const itemResult = await item.delete(id);
+    await item.delete(id);
     res.redirect(`/category/${category_id}`);
   } catch (error) {
     console.error(error);

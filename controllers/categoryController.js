@@ -25,15 +25,14 @@ categoryController.create = [
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      // Re-render form with errors
       const rows = await category.all('asc');
       return res.render('category/categories', {
         categories: rows,
         errors: errors.array(),
         formData: req.body,
+        openDialog: 'new-category-dialog',
       });
     }
-
     try {
       const { name, imageurl } = matchedData(req);
       await category.create(name, imageurl);
@@ -49,7 +48,6 @@ categoryController.getOne = async (req, res) => {
   const { id } = req.params;
   const categoryResult = await category.find(id);
   const itemsResult = await item.findByCategory(id);
-
   res.render('category/category', {
     category: categoryResult[0],
     items: itemsResult,
@@ -66,15 +64,19 @@ categoryController.update = [
   validateCategoryUpdate,
   async (req, res) => {
     const errors = validationResult(req);
-
+    if (!errors.isEmpty()) {
+      const rows = await category.all('asc');
+      return res.render('category/categories', {
+        categories: rows,
+        errors: errors.array(),
+        formData: req.body,
+        openDialog: `edit-category-${req.body.id}`,
+      });
+    }
     try {
       const { id, name, imageurl } = matchedData(req);
-      const result = await category.update(id, {
-        name,
-        imageurl,
-      });
-
-      res.redirect(`/category`);
+      await category.update(id, { name, imageurl });
+      res.redirect('/category');
     } catch (error) {
       console.error(error);
     }
@@ -84,8 +86,7 @@ categoryController.update = [
 categoryController.delete = async (req, res) => {
   try {
     const { id } = req.params;
-
-    const result = await category.delete(id);
+    await category.delete(id);
     res.redirect('/category');
   } catch (error) {
     console.error(error);
