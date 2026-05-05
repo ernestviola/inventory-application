@@ -49,7 +49,7 @@
           const editFormData = isEditError ? formData : undefined;
         %>
           <li class='category-row'>
-            <img src='<%= category.imageUrl %>' alt='<%= category.name %>' class='category-row-img'>
+            <img src='<%= category.imageurl %>' alt='<%= category.name %>' class='category-row-img'>
             <a href='/category/<%= category.id %>' class='category-row-name'><%= category.name %></a>
             <div class='category-row-actions'>
               <button class='icon-btn' title='Edit' onclick="document.getElementById('edit-category-<%= category.id %>').showModal()">

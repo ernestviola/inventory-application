@@ -1,17 +1,6 @@
 const indexController = {};
 import categoryItem from '../db/queries/categoryItem.js';
 
-// [
-//   {
-//     category_id: 7,
-//     category_name: 'new category',
-//     item_name: 'what',
-//     item_quantity: 2,
-//     item_price: 2,
-//     item_imageurl: null
-//   }
-// ]
-
 indexController.get = async (req, res) => {
   const rows = await categoryItem();
   const categoryObject = {};
